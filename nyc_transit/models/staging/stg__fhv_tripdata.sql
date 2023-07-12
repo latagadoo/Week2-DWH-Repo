@@ -1,21 +1,23 @@
- with source as (
-	select * from {{ source('main', 'fhv_tripdata') }}
- ),
+with source as (
 
- renamed as (
-	
-	select
+    select * from {{ source('main', 'fhv_tripdata') }}
 
-	   pickup_datetime,
-           dropoff_datetime,
-           pulocationid as pickup_location_id,
-           dolocationid as dropoff_location_id,
-           dispatching_base_num,
-           affiliated_base_number,
-           filename
+),
 
-	from source
+renamed as (
 
- )
+    select
+        dispatching_base_num,
+        pickup_datetime,
+        dropoff_datetime,
+        pulocationid,
+        dolocationid,
+        --sr_flag, always null so chuck it
+        affiliated_base_number,
+        filename
 
- select * from renamed
+    from source
+
+)
+
+select * from renamed

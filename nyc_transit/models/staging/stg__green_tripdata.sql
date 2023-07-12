@@ -1,33 +1,35 @@
- with source as (
-	select * from {{ source('main', 'green_tripdata') }}
- ),
+with source as (
 
- renamed as (
-	
-	select
-	   vendorid as vendor_id,
-	   lpep_pickup_datetime,
-           lpep_dropoff_datetime,
-           payment_type,
-           trip_type,
-           congestion_surcharge,
-           store_and_fwd_flag::boolean as store_and_fwd_flag,
-           ratecodeid as rate_code_id, 
-           pulocationid as pickup_location_id,
-           dolocationid as dropoff_location_id, 
-           passenger_count, 
-           trip_distance, 
-           fare_amount,
-           extra,
-           mta_tax, 
-           tip_amount,
-           tolls_amount,
-           improvement_surcharge, 
-           total_amount,
-           filename
+    select * from {{ source('main', 'green_tripdata') }}
 
-	from source
+),
 
- )
+renamed as (
 
- select * from renamed
+    select
+        vendorid,
+        lpep_pickup_datetime,
+        lpep_dropoff_datetime,
+        {{flag_to_bool("store_and_fwd_flag")}} as store_and_fwd_flag,        ratecodeid,
+        pulocationid,
+        dolocationid,
+        passenger_count,
+        trip_distance,
+        fare_amount,
+        extra,
+        mta_tax,
+        tip_amount,
+        tolls_amount,
+        ehail_fee,
+        improvement_surcharge,
+        total_amount,
+        payment_type,
+        trip_type,
+        congestion_surcharge,
+        filename
+
+    from source
+
+)
+
+select * from renamed
