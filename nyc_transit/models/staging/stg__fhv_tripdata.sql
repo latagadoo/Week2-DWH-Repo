@@ -7,7 +7,7 @@ with source as (
 renamed as (
 
     select
-        dispatching_base_num,
+        TRIM(UPPER(COALESCE(dispatching_base_num, ''))) AS dispatching_base_num,
         pickup_datetime,
         dropoff_datetime,
         pulocationid,
