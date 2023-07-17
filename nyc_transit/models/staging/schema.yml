@@ -1,0 +1,416 @@
+models:
+  - name: stg__fhv_bases
+    description: ""
+    columns:
+      - name: base_number
+        description: ""
+        tests:
+            - unique
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: varchar
+
+      - name: base_name
+        description: ""
+
+      - name: dba
+        description: ""
+
+      - name: dba_category
+        description: ""
+
+      - name: filename
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+  - name: stg__bike_data
+    description: ""
+    columns:
+      - name: started_at_ts
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: timestamp
+
+      - name: ended_at_ts
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: timestamp
+
+      - name: tripduration
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: start_station_id
+        description: ""
+        
+      - name: start_station_name
+        description: ""
+
+      - name: start_lat
+        description: ""
+
+      - name: start_lng
+        description: ""
+
+      - name: end_station_id
+        description: ""
+
+      - name: end_station_name
+        description: ""
+
+      - name: end_lat
+        description: ""
+
+      - name: end_lng
+        description: ""
+
+      - name: filename
+        description: ""
+
+  - name: stg__fhv_tripdata
+    description: ""
+    columns:
+      - name: dispatching_base_num
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - relationships:
+                  to: source('main', 'fhv_bases')
+                  field: base_number   
+                  config:
+                    severity: warn
+      - name: pickup_datetime
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: dropoff_datetime
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: pulocationid
+        description: ""
+        tests:
+            
+            - dbt_expectations.expect_column_to_exist
+
+      - name: dolocationid
+        description: ""
+        tests:
+            
+            - dbt_expectations.expect_column_to_exist
+
+      - name: affiliated_base_number
+        description: ""
+        tests:
+            
+            - dbt_expectations.expect_column_to_exist
+
+      - name: filename
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+  - name: stg__fhvhv_tripdata
+    description: ""
+    columns:
+      - name: hvfhs_license_num
+        description: ""
+        tests:
+            - unique
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: dispatching_base_num
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: originating_base_num
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: request_datetime
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: on_scene_datetime
+        description: ""
+
+      - name: pickup_datetime
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: dropoff_datetime
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: pulocationid
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: dolocationid
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: trip_miles
+        description: ""
+
+      - name: trip_time
+        description: ""
+
+      - name: base_passenger_fare
+        description: ""
+
+      - name: tolls
+        description: ""
+
+      - name: bcf
+        description: ""
+
+      - name: sales_tax
+        description: ""
+
+      - name: congestion_surcharge
+        description: ""
+
+      - name: airport_fee
+        description: ""
+
+      - name: tips
+        description: ""
+
+      - name: driver_pay
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: shared_request_flag
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: bool
+
+      - name: shared_match_flag
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: bool
+
+      - name: access_a_ride_flag
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: bool
+
+      - name: wav_request_flag
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: bool
+
+      - name: wav_match_flag
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                column_type: bool
+
+      - name: filename
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+  - name: stg__central_park_weather
+    description: ""
+    columns:
+      - name: station
+        description: ""
+        tests:
+            - unique
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: name
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: date
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+      - name: average_wind_speed
+        description: ""
+
+      - name: precipitation
+        description: ""
+
+      - name: snow_fall
+        description: ""
+
+      - name: snow_wind
+        description: ""
+
+      - name: max_temp
+        description: ""
+
+      - name: min_temp
+        description: ""
+
+      - name: filename
+        description: ""
+        tests:
+            - not_null
+            - dbt_expectations.expect_column_to_exist
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
