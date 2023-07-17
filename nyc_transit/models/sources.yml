@@ -2,87 +2,148 @@ sources:
   - name: main
     tables:
       - name: bike_data
+        description: This table contains bike data
+        tests:
+          - dbt_expectations.expect_table_column_count_to_equal:
+              value: 29
+          - dbt_expectations.expect_table_columns_to_match_set:
+              column_list: ["tripduration", "starttime", "stoptime", "start station id", "start station name", "start station latitude", "start station longitude", "end station id", "end station name", "end station latitude", "end station longitude", "bikeid", "usertype", "birth year", "gender", "ride_id", "rideable_type", "started_at", "ended_at", "start_station_name", "start_station_id", "end_station_name", "end_station_id", "start_lat" , "start_lng" , "end_lat", "end_lng", "member_casual", "filename"]
         columns:
           - name: tripduration
+            description: duration of trip_distance
             data_type: CHARACTER VARYING(256)
           - name: starttime
+            description: timestamp of trip start
             data_type: CHARACTER VARYING(256)
           - name: stoptime
+            description: timestamp of trip end
             data_type: CHARACTER VARYING(256)
           - name: start station id
+            description: ID of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: start station name
+            description: name of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: start station latitude
+            description: latitude of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: start station longitude
+            description: longitude of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: end station id
+            description: ID of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: end station name
+            description: Name of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: end station latitude
+            description: latitude of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: end station longitude
+            description: longitude of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: bikeid
+            description: unique identifier for a bike
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
             data_type: CHARACTER VARYING(256)
           - name: usertype
+            description: type of user
             data_type: CHARACTER VARYING(256)
           - name: birth year
+            description: birth year of user
             data_type: CHARACTER VARYING(256)
           - name: gender
+            description: user gender
             data_type: CHARACTER VARYING(256)
           - name: ride_id
+            description: unique identifier for ride
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
             data_type: CHARACTER VARYING(256)
           - name: rideable_type
+            description: type of the bike
             data_type: CHARACTER VARYING(256)
           - name: started_at
+            description: trip start time
             data_type: CHARACTER VARYING(256)
           - name: ended_at
+            description: trip end time
             data_type: CHARACTER VARYING(256)
           - name: start_station_name
+            description: name of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: start_station_id
+            description: ID of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: end_station_name
+            description: name of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: end_station_id
+            description: ID of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: start_lat
+            description: latitude of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: start_lng
+            description: longitude of station where trip starts
             data_type: CHARACTER VARYING(256)
           - name: end_lat
+            description: latitude of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: end_lng
+            description: longitude of station where trip ends
             data_type: CHARACTER VARYING(256)
           - name: member_casual
+            description: casual ride or member
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
 
       - name: central_park_weather
         columns:
           - name: station
+            description: Identifier for station
+            tests:
+            - dbt_expectations.expect_column_to_exist
+            - not_null
             data_type: CHARACTER VARYING(256)
           - name: name
+            description: name of station
             data_type: CHARACTER VARYING(256)
           - name: date
             data_type: CHARACTER VARYING(256)
           - name: awnd
+            description: average wind speed
             data_type: CHARACTER VARYING(256)
           - name: prcp
+            description: precipitation
             data_type: CHARACTER VARYING(256)
           - name: snow
+            description: snowfall
             data_type: CHARACTER VARYING(256)
           - name: snwd
+            description: snow depth
             data_type: CHARACTER VARYING(256)
           - name: tmax
+            description: maximum temperature
             data_type: CHARACTER VARYING(256)
           - name: tmin
+            description: minimum temperature
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
 
       - name: daily_citi_bike_trip_counts_and_weather
@@ -118,96 +179,207 @@ sources:
           - name: weekday_non_holiday
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
 
       - name: fhv_bases
         columns:
           - name: base_number
+            description: The TLC license number of the dispatching base
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
+              - not_null
+              - unique
             data_type: CHARACTER VARYING(256)
           - name: base_name
+            description: The official name of the base entity
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
             data_type: CHARACTER VARYING(256)
           - name: dba
-            data_type: CHARACTER VARYING(256)
+            description: The “doing business as” name of the base
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
           - name: dba_category
+            description: The TLC license number of the dispatching base
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
+                   
             data_type: CHARACTER VARYING(256)
 
       - name: fhv_tripdata
         columns:
           - name: dispatching_base_num
+            description: base number of dispatch
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
             data_type: CHARACTER VARYING(256)
           - name: pickup_datetime
             data_type: TIMESTAMP
+            description: "The date and time of the trip pick up"
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
+              
           - name: dropoff_datetime
             data_type: TIMESTAMP
+            description: "The date and time of the trip drop up"
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
           - name: pulocationid
+            description: "TLC Taxi Zone in which the trip began"
             data_type: DOUBLE
           - name: dolocationid
+            description: "TLC Taxi Zone in which the trip ended"
             data_type: DOUBLE
           - name: sr_flag
             data_type: INTEGER
           - name: affiliated_base_number
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
 
       - name: fhvhv_tripdata
         columns:
           - name: hvfhs_license_num
             data_type: CHARACTER VARYING(256)
+            description: "The TLC license number of the HVFHS base or business
+                          As of September 2019, the HVFHS licensees are the following
+                           HV0002: Juno
+                           HV0003: Uber
+                           HV0004: Via
+                           HV0005: Lyft" 
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              - not_null
           - name: dispatching_base_num
             data_type: CHARACTER VARYING(256)
+            description: "The TLC Base License Number of the base that dispatched"
           - name: originating_base_num
             data_type: CHARACTER VARYING(256)
+            description: "base number of the base that received the original request"
           - name: request_datetime
             data_type: TIMESTAMP
+            description: "date/time when passenger requested to be picked up"
           - name: on_scene_datetime
             data_type: TIMESTAMP
+            description: "date/time when driver arrived at pick-up location"
           - name: pickup_datetime
+            description: "The date and time of the trip pick off"
             data_type: TIMESTAMP
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              - not_null
           - name: dropoff_datetime
+            description: "The date and time of the trip drop off"
             data_type: TIMESTAMP
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              - not_null
           - name: pulocationid
+            description: "TLC Taxi Zone in which the trip began"
             data_type: BIGINT
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              - not_null
           - name: dolocationid
+            description: "TLC Taxi Zone in which the trip ended"
             data_type: BIGINT
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              - not_null
           - name: trip_miles
+            description: "total miles for passenger trip"
             data_type: DOUBLE
+            tests:
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: 0
+                  max_value: 1500
           - name: trip_time
+            description: "total time in seconds for passenger trip"
             data_type: BIGINT
           - name: base_passenger_fare
+            description: "base passenger fare before tolls, tips, taxes and fees"
             data_type: DOUBLE
           - name: tolls
+            description: "total amount of all tolls paid in trip"
             data_type: DOUBLE
           - name: bcf
+            description: "total amount collected in trip for Black Car Fund"
             data_type: DOUBLE
           - name: sales_tax
+            description: "total amount collected in trip for NYS sales tax"
             data_type: DOUBLE
           - name: congestion_surcharge
+            description: "total amount collected in trip for NYS congestion surcharge"
             data_type: DOUBLE
           - name: airport_fee
+            description: "$2.50 for both drop off and pick up at LaGuradia, New York"
             data_type: DOUBLE
           - name: tips
+            description: "total amount of tips received from passenger"
             data_type: DOUBLE
           - name: driver_pay
+            description: "total driver pay ( not including tolls, tips, surcharges, taxes"
             data_type: DOUBLE
           - name: shared_request_flag
+            description: "Did the passenger agree to a shared/pooled ride, regardless if they were they matched? (Y/N)"
             data_type: CHARACTER VARYING(256)
           - name: shared_match_flag
+            description: "Did the passenger share th evehicle with another passenger that booked separately at any point during the trip? (Y/N)"
             data_type: CHARACTER VARYING(256)
           - name: access_a_ride_flag
+            description: "Was the trip administered on behalf of the Metropolitan Transportation Authority (MTA)? (Y/N)"
             data_type: CHARACTER VARYING(256)
+            tests:
+              - accepted_values:
+                  values: ['Y', 'N']
+                  config:
+                    severity: warn
           - name: wav_request_flag
+            description: "Did the passenger request a wheelchair-accessible?" 
             data_type: CHARACTER VARYING(256)
           - name: wav_match_flag
+            description: "Did the trip occur in a wheelchair-accessible vehicle?"
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
 
       - name: green_tripdata
         columns:
           - name: vendorid
+            description: identifier for vendor
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
             data_type: BIGINT
           - name: lpep_pickup_datetime
             data_type: TIMESTAMP
@@ -248,11 +420,20 @@ sources:
           - name: congestion_surcharge
             data_type: DOUBLE
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
 
       - name: yellow_tripdata
         columns:
           - name: vendorid
+            description: identifier for vendor
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              
             data_type: BIGINT
           - name: tpep_pickup_datetime
             data_type: TIMESTAMP
@@ -291,4 +472,9 @@ sources:
           - name: airport_fee
             data_type: DOUBLE
           - name: filename
+            description: File from which record was imported
+            tests:
+            - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: varchar
+            - dbt_expectations.expect_column_to_exist
             data_type: CHARACTER VARYING(256)
