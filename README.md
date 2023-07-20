@@ -1,5 +1,8 @@
 # cmu-95797-23m6
+Week 3
+Added tests in sources and staging, updated staging sql to clean base_number field of spaces and nulls and convert to upper case
 
+Week 23
 Steps:
 1. Activated python virtual env to enable dbt use
 2 Initialized dbt project
