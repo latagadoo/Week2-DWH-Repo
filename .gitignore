@@ -170,3 +170,5 @@ data/
 *.duckdb
 .user.yml
 dbt_packages/
+*.wal
+logs/
