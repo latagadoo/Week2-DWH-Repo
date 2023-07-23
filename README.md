@@ -1,4 +1,14 @@
 # cmu-95797-23m6
+Week 4
+Added SQL in Analysis folder and screenshots in word doc under Answers for Week 4 for the following SQLs
+
+bike_trips_and_duration_by_weekday.sql - count & total time of bikes trips by weekday
+taxi_trips_ending_at_airport.sql - total number of trips ending in service_zones 'Airports' or 'EWR'
+inter_borough_taxi_trips_by_weekday.sql (hard!): by weekday, 
+count of total trips, trips starting and ending in a different borough, and 
+percentage w/ different start/end
+
+
 Week 3
 Added tests in sources and staging, updated staging sql to clean base_number field of spaces and nulls and convert to upper case
 
