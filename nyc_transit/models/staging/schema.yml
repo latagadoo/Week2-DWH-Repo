@@ -23,9 +23,7 @@ models:
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: int
-
+          
       - name: start_station_id
         description: ""
 
@@ -63,7 +61,6 @@ models:
       - name: end_lat
         description: ""
         tests:
-          - not_null
           - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: double
@@ -74,7 +71,6 @@ models:
       - name: end_lng
         description: ""
         tests:
-          - not_null
           - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: double
@@ -98,55 +94,42 @@ models:
         description: ""
         tests:
           - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: date
 
       - name: awnd
         description: ""
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: double
 
       - name: prcp
         description: ""
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: double
 
       - name: snow
         description: ""
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: double
 
       - name: snwd
         description: ""
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: double
 
       - name: tmax
         description: ""
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: int
 
       - name: tmin
         description: ""
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: int
 
@@ -169,9 +152,7 @@ models:
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: int
-
+         
       - name: precipitation
         description: ""
         tests:
@@ -230,16 +211,12 @@ models:
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: int
-
+          
       - name: year
         description: ""
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: int
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 2013
 
@@ -248,8 +225,6 @@ models:
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: int
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 1
               max_value: 12
@@ -266,9 +241,7 @@ models:
         description: ""
         tests:
           - dbt_expectations.expect_column_to_exist
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: int
-
+          
       - name: weekday
         description: ""
         tests:

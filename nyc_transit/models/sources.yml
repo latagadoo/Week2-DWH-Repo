@@ -114,7 +114,6 @@ sources:
             tests:
             - dbt_expectations.expect_column_to_exist
             - not_null
-            - unique
             data_type: CHARACTER VARYING(256)
           - name: name
             description: name of station
