@@ -172,3 +172,4 @@ data/
 dbt_packages/
 *.wal
 logs/
+.DS_Store
