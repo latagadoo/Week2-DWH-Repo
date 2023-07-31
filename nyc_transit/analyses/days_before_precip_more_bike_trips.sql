@@ -6,13 +6,7 @@ WITH PrecipitationSnowDays AS (
     FROM {{ ref('stg__central_park_weather') }}
     WHERE precipitation > 0 OR snow_fall > 0
 ),
-BikeTripsPerDay AS (
-    SELECT
-        date_trunc('day', started_at_ts) AS date,
-        count(*) AS total_trips
-    FROM {{ ref('mart__fact_all_bike_trips') }}
-    GROUP BY date_trunc('day', started_at_ts)
-),
+
 BikeTripsWithLag AS (
     SELECT 
         date_trunc('day', started_at_ts) AS date,
@@ -31,3 +25,9 @@ SELECT
 FROM PrecipitationSnowDays psd
 JOIN BikeTripsWithLag bt ON bt.date = psd.date
 GROUP BY psd.date;
+
+-- PrecipitationSnowDays gets the date, precipitation, snow values for the date.
+-- BikeTripsWithLag gets the date and trips for the date, LAG and lead gets the previous date, next date, previous day trips, next day trips
+-- Lastly average_trips on the day, day before and day after
+--
+

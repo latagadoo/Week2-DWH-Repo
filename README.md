@@ -1,4 +1,7 @@
 # cmu-95797-23m6
+Week5
+Added the queries. txt files contain individualual query results. Sincence text files displayed some special characters, I have also added word doc that contains screenshot of different queries.
+
 Week 4
 Added SQL in Analysis folder and screenshots in word doc under Answers for Week 4 for the following SQLs
 
